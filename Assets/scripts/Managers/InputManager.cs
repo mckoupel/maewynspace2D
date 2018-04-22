@@ -53,20 +53,6 @@ public class InputManager : MonoBehaviour
 
         #region touchscroll
 
-        if (Input.touchCount == 2)
-        {
-            Touch touch0 = Input.GetTouch(0);
-            Touch touch1 = Input.GetTouch(1);
-            Vector2 prevTouchPosition0 = touch0.position - touch0.deltaPosition;
-            Vector2 prevTouchPosition1 = touch1.position - touch1.deltaPosition;
-            float touchDistance = (touch1.position - touch0.position).magnitude;
-            float prevTouchDistance = (prevTouchPosition1 - prevTouchPosition1).magnitude;
-            float touchChangeMultiplier = touchDistance / prevTouchDistance;
-
-            spaceGeneral.cameraManager.ChangeZoomTarget(touchChangeMultiplier);
-        }
-
-         // if the second touch just started
         if (Input.touchCount == 2 && Input.GetTouch(1).phase == TouchPhase.Began)
         {
              Vector2 touch1 = Input.GetTouch(0).position;
@@ -86,7 +72,7 @@ public class InputManager : MonoBehaviour
              float changeInDistance = newDistance - initialDistance;
              float percentageChange = changeInDistance / initialDistance;
 
-             spaceGeneral.cameraManager.ChangeZoomTarget(percentageChange);
+             spaceGeneral.cameraManager.ChangeZoomTarget(-percentageChange / 2);
         }
 
 
